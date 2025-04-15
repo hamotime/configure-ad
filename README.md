@@ -233,3 +233,31 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <br />
 
+<h3><b>Group Policy and Managing Accounts</b></h3>
+<p> 1. <b> Dealing with Account Lockouts </b>
+
+- Pick a user account you created. Open Active Directory Users and Computers. I will use the bab.wilo account
+- Setup Account Lockout Policy in Group Policy Management
+- - Open Server Manager -> Tools -> Group Policy Management. We can create a new GPO (Group Policy Object) but we will just edit the “Default Domain Policy” for now. Right click it -> Edit
+  - Browse to Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Account Policies -> Account Lockout Policy.
+  - Double click “Account Lockout Duration” -> Change Lockout duration to 30min. Press Ok for the change in suggested values.
+  - The Parameters should now look like:
+  - Account Lockout Duration = 30 minutes
+  - Account Lockout Threshold = 5 invalid logon attempts
+  - Allow Administrator account lockout - Not defined
+  - Reset account lockout counter after = 10 minutes
+- - Close “Group Policy Management Editor”. In Group Policy Management open the settings tab of “Default Domain Policy” and verify the Account Lockout Policy change has been applied.
+- Update the Group Policy on client-1 for the account lockout policy to take effect. To do this, we will login to client-1 with a domain admin account (jane_admin) to force the policy update so we can test the lock out policy.
+- Open command as administrator -> type gpupdate /force
+- - Now on client-1 when a user fails to login 5 times the account should logout.
+- Next, type gpresult /r
+- - 
+</p>
+<p>
+<img src="https://i.imgur.com/3qC3tLY.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/bV0l3ZX.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/qS03DYh.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/WMO4in6.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/P9yvkR5.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+</p>
+<br />
