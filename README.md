@@ -111,3 +111,86 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <br />
 
+<h3><b>Deploying Active Directory</b></h3>
+<p> 1. <b> Install Active Directory (AD) </b>
+
+- Start -> Server Manager - > Add Roles and Features -> Click next till you get to “Server Roles” -> Check “Active Directory Domain Services” -> Click next all the way to the end and checking “Restart the destination server automatically if required” (optional, not necessary) -> Click install.
+- Now configure dc-1 to become a domain controller post AD install.
+- Select flag with warning icon in Server manager -> Select “promote this server to a domain controller”.
+- Choose “Add new forest” call it mydomain.com. Click next.
+- Under “Type the Directory Services Restore Mode (DSRM)” enter a password. Click next.
+- Uncheck “Create DNS delegation".
+- Next all the way to the end and click install. Dc-1 should automatically restart so you will have to log back into the VM.
+- It is acting as a domain controller, we will want to use the mydomain prefix to specify the domain and user to log in. So mydomain.com\labuser. You want to do this to make sure you avoid logging in as a local user.
+</p>
+<p>
+<img src="https://i.imgur.com/fIxNn5j.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/MUT8yZa.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/SKzlmMX.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/PV1FNSm.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/a8iZDG5.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/0spMRCk.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/a7YwbIY.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/ZonSjZM.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/dMKkcRh.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/8qomTba.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/PjY5Dh3.png" height="80%" width="80%" alt="Install Active Directory"/>
+<img src="https://i.imgur.com/ZMsNRch.png" height="80%" width="80%" alt="Install Active Directory"/>
+</p>
+<br />
+
+<p> 2. <b> Create a Domain Admin user within the Domain (AD) </b>
+
+- Refer to steps in Lab 5 Deploying AD documentation
+- Open Server Manager -> Click Tools -> Select "Active Directory Users and Computers"
+- Create 2 Organizational Units (OU). Right click domain -> New -> OU. Call it _EMPLOYEES and click ok. Create another one called _ADMINS.
+- Refresh the domain and you can see the newly created OUs
+- Create a user. Right click _ADMINS folder -> New -> User and enter the info:
+- - Name: Jane Doe
+  - Username: jane_admin
+  - Password: Cyberlab123!
+  - Enable “Password never expires”. This is bad a security practice and you would want the user to change their password at next login but disabling for the lab to save time.
+  - Next then Finish. You should notice the new user in the _ADMINS folder.
+- Add the new user to “Domain Admins” security group
+- - Right click user -> Properties -> “Member of” tab -> Add -> Search domain admins then click “Check names” -> click Ok and Ok. Go back into the User’s properties and verify it is a Member of “Domain Admins”.
+- Log out and log back in as jane_admin
+</p>
+<p>
+<img src="https://i.imgur.com/hY7BAqx.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/kOOa3tp.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/Gc6MqYe.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/UP5TdsX.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/aGDBfaG.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/DTcxSr3.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/b9pgPMC.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/uh7mc9D.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/w7bmQQn.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/1odzFZR.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+<img src="https://i.imgur.com/oIYdyqI.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
+</p>
+<br />
+
+<p> 3. <b> Join client-1 to Domain (AD) </b>
+
+- Login to client-1 as the local labuser account
+- Open Server Manager -> Click Tools -> Select "Active Directory Users and Computers"
+- Right click Start -> System -> Rename PC (advanced) -> Computer Name Tab, Click Change -> Choose Domain and enter mydomain.com click Ok. The Computer Name/Domain Changes window should open verifying we successfully contacted the domain thanks to the DNS parameter change we made earlier. If this window did not pop you will need to go back to Azure and change the NIC’ss DNS Server setting to point to the dc-1 private IP address.
+- Enter the jane_admin account credentials and click Ok. A window should popup welcoming you to the domain. Restart the VM.
+- Login to dc-1 as jane_admin and verify that client-1 has been added to AD.
+- Create a new OU called _CLIENTS and drag client-1 from Computers TO _CLIENTS.
+- Click "Yes" for the Warning notification. The Computer OU should be empty and client-1 should be in _CLIENTS now.
+</p>
+<p>
+<img src="https://i.imgur.com/MNOD3n2.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/7Tl2zIX.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/yAxPP74.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/zVzDd0W.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/PDc557o.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/SuImAhE.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/kRlv6Vk.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/pVJcR80.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/VrutJx9.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+</p>
+<br />
+
+
