@@ -26,10 +26,10 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 - Group Policy and Managing Accounts
 
 <h2>Deployment and Configuration Steps</h2>
+<h3><b>Preparing Active Direcory Infraustructure in Azure</b></h3>
+<p> 1. <b> Setup a Domain Controller in Azure </b>
 
-<p> <b>1. Preparing Active Direcory Infraustructure in Azure</b>
-
-- Setup a Domain Controller VM in Azure. Create a Resource Group, Vnet and Subnet and Domain Controller VM. For the Domain Controller configuring the following settings:
+- Create a Resource Group, Vnet and Subnet and Domain Controller VM. For the Domain Controller configuring the following settings:
 - Username: labuser
 - Password: Cyberattack123!
 - Attach to Resource Group you created
