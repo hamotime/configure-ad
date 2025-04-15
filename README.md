@@ -193,4 +193,43 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <br />
 
+<h3><b>Creating Users with Powershell</b></h3>
+<p> 1. <b> Setup Remote Desktop for non-administrative users on client-1 (AD) </b>
+
+- Log into client-1 as jane_admin
+- Right click start -> System -> Remote Desktop -> Select users that can remotely access this PC. Click add -> search domain users and Check Names. Click Ok and Ok.
+- Allow “domain users” to access remote desktop. All users by default are a member of this group on the domain.
+- You now have the ability to log into this client as a non-administrative user. Normally this would be done with Group Policy to change a bunch of computers at once but as we only have the one Client I went ahead and did this in the OS. 
+</p>
+<p>
+<img src="https://i.imgur.com/P4KwgpC.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/dEdCJ1g.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/v3SAEtE.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+</p>
+<br />
+
+<p> 2. <b> Create a bunch of additional users and attempt to log into client-1 with one of the users (AD) </b>
+
+- Login to dc-1 as jane_admin
+- Open powershell_ise as administrator
+- Create a new file called “create-users” to Desktop and paste contents of script into it. This script will automatically create random user accounts into our _EMPLOYEES OU folder without us having to manually create them.
+- Click” Run Script” and Ok. You should see in the blue command line window user accounts being created. It will take a few minutes to create.
+- Open “Active Directory Users and Computers” and observe the user accounts being created in _EMPLOYEES.
+- Attempt to log into client-1 using one of these new created accounts. I will use “bab.wilo”. Take note of the password that was used in the script.
+- Open PowerShell, you will notice a local folder has been create for the new user on client-1. Open file explorer and go to C:\Users. You will notice folders have been created for all the accounts that have logged into client-1.
+</p>
+<p>
+<img src="https://i.imgur.com/XynsHhj.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/Xppy7Sp.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/yhnam3r.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/DpSAV2u.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/FTkvwzV.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/asaQiMM.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/MvJhzdt.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/sWjKBbp.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/6Ll69sN.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/QhGjaS9.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+<img src="https://i.imgur.com/m40bnKx.png" height="80%" width="80%" alt="Creating Users with Powershell"/>
+</p>
+<br />
 
