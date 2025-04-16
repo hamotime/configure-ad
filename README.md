@@ -27,7 +27,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 
 <h2>Deployment and Configuration Steps</h2>
 <h3><b>Preparing Active Direcory Infraustructure in Azure</b></h3>
-<p> 1. <b> Setup a Domain Controller in Azure </b>
+<p> <b>1.  Setup a Domain Controller in Azure</b>
 
 - Create a Resource Group, Vnet and Subnet and Domain Controller VM. For the Domain Controller configuring the following settings:
 - Username: labuser
@@ -38,7 +38,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 - Image: Windows Server 2022
 - Size: 2 CPUs, 8gb RAM.
 - Attach to Vnet you created in the Networking Tab.
-- Review and Create and verify that dc-1 was created in Azure. Throughout the rest of the guide I will refer to the Domain Controller as "dc-1"
+- Review and Create and verify that dc-1 was created in Azure. Throughout the rest of the guide I will refer to the Domain Controller as "dc-1".
 </p>
 <p>
 <img src="https://i.imgur.com/3qC3tLY.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
@@ -56,7 +56,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 - Image = Windows 10 Pro
 - Username = labuser
 - Password = Cyberattack23!
-- For the rest of the guide I will refer to the Client VM as "client-1"
+- For the rest of the guide I will refer to the Client VM as "client-1".
 
 </p><b>3. Set Domain Controller's Private IP address to Static.</b>
 
@@ -72,8 +72,8 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 
 <p><b>4. Log into dc-1 via RDP and disable Windows Firewall to test connectivity between hosts</b>
 
-- Get dc-1's public IP address
-- Connect to it via RDP
+- Get dc-1's public IP address.
+- Connect to it via RDP.
 - Click Start -> type "Defender" -> Open "Windows Defender Firewall with Advanced Security" -> Click "Windows Defender firewall with Advanced Security" -> Click Windows Defender Firewall Properties -> Turn Firewall state off for Domain, Private and Public Profiles. Click Ok.
 </p>
 <p>
@@ -87,7 +87,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 
 <p><b>5. Set client-1 DNS server parameter to private IP of dc-1</b>
 
-- Get dc-1’s private IP 
+- Get dc-1’s private IP .
 - Open Network Settings for client-1 -> select NIC -> On left click DNS servers -> Under “Inherit virtual network” select custom -> enter the IP address of dc-1 -> click Save. The DNS Server for "client-1" is now dc-1 which handles resolving domain names to IPs for client-1 and enables us to join the domain.
 - Restart "client-1" to make sure the new DNS configuration takes effect.
 </p>
@@ -112,7 +112,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 <br />
 
 <h3><b>Deploying Active Directory</b></h3>
-<p> 1. <b> Install Active Directory (AD) </b>
+<p> <b>1. Install Active Directory (AD)</b>
 
 - Start -> Server Manager - > Add Roles and Features -> Click next till you get to “Server Roles” -> Check “Active Directory Domain Services” -> Click next all the way to the end and checking “Restart the destination server automatically if required” (optional, not necessary) -> Click install.
 - Now configure dc-1 to become a domain controller post AD install.
@@ -139,21 +139,21 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <br />
 
-<p> 2. <b> Create a Domain Admin user within the Domain (AD) </b>
+<p>  <b>2. Create a Domain Admin user within the Domain (AD)</b>
 
-- Refer to steps in Lab 5 Deploying AD documentation
-- Open Server Manager -> Click Tools -> Select "Active Directory Users and Computers"
+- Refer to steps in Lab 5 Deploying AD documentation.
+- Open Server Manager -> Click Tools -> Select "Active Directory Users and Computers".
 - Create 2 Organizational Units (OU). Right click domain -> New -> OU. Call it _EMPLOYEES and click ok. Create another one called _ADMINS.
-- Refresh the domain and you can see the newly created OUs
+- Refresh the domain and you can see the newly created OUs.
 - Create a user. Right click _ADMINS folder -> New -> User and enter the info:
 - - Name: Jane Doe
   - Username: jane_admin
   - Password: Cyberlab123!
   - Enable “Password never expires”. This is bad a security practice and you would want the user to change their password at next login but disabling for the lab to save time.
   - Next then Finish. You should notice the new user in the _ADMINS folder.
-- Add the new user to “Domain Admins” security group
+- Add the new user to “Domain Admins” security group.
 - - Right click user -> Properties -> “Member of” tab -> Add -> Search domain admins then click “Check names” -> click Ok and Ok. Go back into the User’s properties and verify it is a Member of “Domain Admins”.
-- Log out and log back in as jane_admin
+- Log out and log back in as jane_admin.
 </p>
 <p>
 <img src="https://i.imgur.com/hY7BAqx.png" height="80%" width="80%" alt="Create a Domain Admin user"/>
@@ -170,9 +170,9 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <br />
 
-<p> 3. <b> Join client-1 to Domain (AD) </b>
+<p> <b>3. Join client-1 to Domain (AD)</b>
 
-- Login to client-1 as the local labuser account
+- Login to client-1 as the local labuser account.
 - Open Server Manager -> Click Tools -> Select "Active Directory Users and Computers"
 - Right click Start -> System -> Rename PC (advanced) -> Computer Name Tab, Click Change -> Choose Domain and enter mydomain.com click Ok. The Computer Name/Domain Changes window should open verifying we successfully contacted the domain thanks to the DNS parameter change we made earlier. If this window did not pop you will need to go back to Azure and change the NIC’ss DNS Server setting to point to the dc-1 private IP address.
 - Enter the jane_admin account credentials and click Ok. A window should popup welcoming you to the domain. Restart the VM.
@@ -194,9 +194,9 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 <br />
 
 <h3><b>Creating Users with Powershell</b></h3>
-<p> 1. <b> Setup Remote Desktop for non-administrative users on client-1 (AD) </b>
+<p> <b>1. Setup Remote Desktop for non-administrative users on client-1 (AD)</b>
 
-- Log into client-1 as jane_admin
+- Log into client-1 as jane_admin.
 - Right click start -> System -> Remote Desktop -> Select users that can remotely access this PC. Click add -> search domain users and Check Names. Click Ok and Ok.
 - Allow “domain users” to access remote desktop. All users by default are a member of this group on the domain.
 - You now have the ability to log into this client as a non-administrative user. Normally this would be done with Group Policy to change a bunch of computers at once but as we only have the one Client I went ahead and did this in the OS. 
@@ -208,10 +208,10 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <br />
 
-<p> 2. <b> Create a bunch of additional users and attempt to log into client-1 with one of the users (AD) </b>
+<p> <b>2. Create a bunch of additional users and attempt to log into client-1 with one of the users (AD)</b>
 
-- Login to dc-1 as jane_admin
-- Open powershell_ise as administrator
+- Login to dc-1 as jane_admin.
+- Open powershell_ise as administrator.
 - Create a new file called “create-users” to Desktop and paste contents of script into it. This script will automatically create random user accounts into our _EMPLOYEES OU folder without us having to manually create them.
 - Click” Run Script” and Ok. You should see in the blue command line window user accounts being created. It will take a few minutes to create.
 - Open “Active Directory Users and Computers” and observe the user accounts being created in _EMPLOYEES.
@@ -234,13 +234,13 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 <br />
 
 <h3><b>Group Policy and Managing Accounts</b></h3>
-<p> 1. <b> Dealing with Account Lockouts </b>
+<p> <b>1. Dealing with Account Lockouts</b>
 
-- Pick a user account you created. Open Active Directory Users and Computers. I will use the bab.wilo account
-- Setup Account Lockout Policy in Group Policy Management
-- - Open Server Manager -> Tools -> Group Policy Management. We can create a new GPO (Group Policy Object) but we will just edit the “Default Domain Policy” for now. Right click it -> Edit
+- Pick a user account you created. Open Active Directory Users and Computers. I will use the bab.wilo account.
+- Setup Account Lockout Policy in Group Policy Management:
+- - Open Server Manager -> Tools -> Group Policy Management. We can create a new GPO (Group Policy Object) but we will just edit the “Default Domain Policy” for now. Right click it -> Edit.
   - Browse to Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Account Policies -> Account Lockout Policy.
-  - Double click “Account Lockout Duration” -> Change Lockout duration to 30min. Press Ok for the change in suggested values.
+  - Double click “Account Lockout Duration” -> Change Lockout duration to 30min. Press "Ok" for the change in suggested values.
   - The Parameters should now look like:
   - Account Lockout Duration = 30 minutes
   - Account Lockout Threshold = 5 invalid logon attempts
@@ -248,16 +248,55 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
   - Reset account lockout counter after = 10 minutes
 - - Close “Group Policy Management Editor”. In Group Policy Management open the settings tab of “Default Domain Policy” and verify the Account Lockout Policy change has been applied.
 - Update the Group Policy on client-1 for the account lockout policy to take effect. To do this, we will login to client-1 with a domain admin account (jane_admin) to force the policy update so we can test the lock out policy.
-- Open command as administrator -> type gpupdate /force
+- Open command as administrator -> type gpupdate /force.
 - - Now on client-1 when a user fails to login 5 times the account should logout.
-- Next, type gpresult /r
-- - 
+- Next, type gpresult /r.
+- - Under COMPUTER SETTINGS search for “Applied Group Policy Objects. Beneath that should be “Default Domain Policy”. This tells us the GPO has been applied to this computer and any changes we have made to it will be applied to client-1.
+- Conduct 6 failed login attempts with the account. The account should now be locked out. This error indicates our group policy worked.
+- Switch over to dc-1 and unlock the account. Right click the domain -> select Find -> search the account name and it should come up in the search results. Go into Properties -> tick Unlock Account -> Ok. Account should now be unlocked.
+- Attempt to login to client-1 as the account. Open Powershell -> type whoami. Can see you are logged onto mydomain as “bab.wilo".
+- Reset the password for the account.
+- - Open Active Directory and find the account. Right click -> Reset Password -> Enter a new password -> Ok. Confirmation window should pop up saying the password has been changed for the account.
+- Attempt to login with the old password. It should not work. Then enter new password and that should work.
 </p>
 <p>
-<img src="https://i.imgur.com/3qC3tLY.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
-<img src="https://i.imgur.com/bV0l3ZX.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
-<img src="https://i.imgur.com/qS03DYh.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
-<img src="https://i.imgur.com/WMO4in6.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
-<img src="https://i.imgur.com/P9yvkR5.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/DMmqa12.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/ZDpVQ7b.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/GgQi6Ef.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/piWVEAd.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/ggpjn8I.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/ESGPsou.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/rCW3BWb.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/BM2tYKS.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/ygAFAPr.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/aB0sBWp.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/N6hp4ww.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/oy2BdZT.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/NNXOPK5.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/9C0YGUY.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/q2hC4Di.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/657Vf5N.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/CUdk4ft.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/F0qIcVY.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/yIihXdl.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/FIYiuzX.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+</p>
+<br />
+
+<p> <b>2. Enabling and Disabling Accounts</b>
+
+- Going to proceed and disable the bab.wilo account.
+- Switch to dc-1. Search for the account in AD -> Right click it and select “Disable account” -> Window should popup saying the account was disabled. 
+- Login to client-1 with the account. You should get the error message that the account is disabled.
+- Re-enable the account and attempt to log back in. Search for the account in Active Directory -> Right click -> “Enable account”. Window should popup saying the account has been enabled.
+- Check command line to verify that you are logged in as the account.
+</p>
+<p>
+<img src="https://i.imgur.com/OvYBAmb.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/6ayxYSO.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/iXTQ5RS.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/WseCYO9.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/AaGVS1P.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/Ul3oDvs.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
 </p>
 <br />
