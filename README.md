@@ -44,7 +44,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 <img src="https://i.imgur.com/3qC3tLY.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
 <img src="https://i.imgur.com/bV0l3ZX.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
 <img src="https://i.imgur.com/qS03DYh.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
-<img src="https://i.imgur.com/WMO4in6.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
+<img src="https://i.imgur.com/QxrINRk.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
 <img src="https://i.imgur.com/P9yvkR5.png" height="80%" width="80%" alt="Setting up Domain Controller"/>
 </p>
 <br />
@@ -78,7 +78,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <p>
 <img src="https://i.imgur.com/iNTM3O6.png" height="80%" width="80%" alt="Windows Firewall Connectivity"/>
-<img src="https://i.imgur.com/ysBg1cS.png" height="80%" width="80%" alt="Windows Firewall Connectivity"/>
+<img src="https://i.imgur.com/SPbV9EM.png" height="80%" width="80%" alt="Windows Firewall Connectivity"/>
 <img src="https://i.imgur.com/eiDfOWW.png" height="80%" width="80%" alt="Windows Firewall Connectivity"/>
 <img src="https://i.imgur.com/g6r0yF0.png" height="80%" width="80%" alt="Windows Firewall Connectivity"/>
 <img src="https://i.imgur.com/ADpefbn.png" height="80%" width="80%" alt="Windows Firewall Connectivity"/>
@@ -181,12 +181,12 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 - Click "Yes" for the Warning notification. The Computer OU should be empty and client-1 should be in _CLIENTS now.
 </p>
 <p>
-<img src="https://i.imgur.com/MNOD3n2.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/rhPReli.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
 <img src="https://i.imgur.com/7Tl2zIX.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
-<img src="https://i.imgur.com/yAxPP74.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/uKLUvjA.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
 <img src="https://i.imgur.com/zVzDd0W.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
 <img src="https://i.imgur.com/PDc557o.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
-<img src="https://i.imgur.com/SuImAhE.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
+<img src="https://i.imgur.com/laKAzZd.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
 <img src="https://i.imgur.com/kRlv6Vk.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
 <img src="https://i.imgur.com/pVJcR80.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
 <img src="https://i.imgur.com/VrutJx9.png" height="80%" width="80%" alt="Join Client-1 to Domain"/>
