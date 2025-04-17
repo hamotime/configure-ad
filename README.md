@@ -65,8 +65,8 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 - dc-1 is now configured with a static IP address as we are going to use it as a DNS Server. 
 <p>
 <img src="https://i.imgur.com/LC4ckUJ.png" height="80%" width="80%" alt="DC-1 Static IP change"/>
-<img src="https://i.imgur.com/dZE8tZU.png" height="80%" width="80%" alt="DC-1 Static IP change"/>
-<img src="https://i.imgur.com/AO2QVLW.png" height="80%" width="80%" alt="DC-1 Static IP change"/>
+<img src="https://i.imgur.com/i7guTZT.png" height="80%" width="80%" alt="DC-1 Static IP change"/>
+<img src="https://i.imgur.com/ZM1Wtxh.png" height="80%" width="80%" alt="DC-1 Static IP change"/>
 </p>
 <br />
 
